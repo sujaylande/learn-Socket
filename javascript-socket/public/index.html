@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Chat App</title>
+</head>
+<body>
+    <h1>Chatting!</h1>
+    <input type="text" id="message" placeholder="Type your message here">
+    <button id="send">Send</button>
+    <div id="allMessages"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const message = document.getElementById('message');
+        const send = document.getElementById('send');
+        const allMessages = document.getElementById('allMessages');
+
+        // Listen for messages from the server
+        socket.on('server-message', ({msg, id}) => {
+            const messageElement = document.createElement('p');
+            messageElement.textContent = `${id}: ${msg}`;
+            allMessages.appendChild(messageElement);
+        });
+
+        // Send message to the server
+        send.addEventListener('click', () => {
+            socket.emit('client-message', message.value);
+            message.value = '';
+        });
+    </script>
+</body>
+</html>
