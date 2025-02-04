@@ -2,4 +2,4 @@
 ﻿# learn-Socket
 
 ## Screenshot
-![App Screenshot](./docs/Screenshot.png)
+![App Screenshot](./docs/Screenshot (124).png)
